@@ -13,7 +13,7 @@ const latestPost = async () =>{
         createLatestCard.classList = `card w-96 bg-base-100 shadow-xl`;
         createLatestCard.innerHTML =`
         <figure class="px-10 pt-10">
-            <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" class="rounded-xl" />
+            <img src="${postData.cover_image}" alt="Shoes" class="rounded-xl" />
         </figure>
         <div class="card-body space-y-3">
             <h2 class="flex gap-1"> 
