@@ -1,3 +1,20 @@
+// Discussion Cards
+const discussionCardMusic = async () => {
+    const url = 'https://openapi.programming-hero.com/api/retro-forum/posts';
+    const res = await fetch(url);
+    const posts = await res.json();
+    const postsCards = posts.posts;
+    console.log(postsCards);
+
+    postsCards.forEach(post =>{
+        // console.log(post);
+        
+    })
+}
+
+discussionCardMusic();
+
+// Latest Post Cards
 const latestPost = async () =>{
     const url = 'https://openapi.programming-hero.com/api/retro-forum/latest-posts';
     const res = await fetch(url);
