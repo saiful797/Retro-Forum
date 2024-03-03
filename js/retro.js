@@ -52,6 +52,7 @@ const latestPost = async () =>{
             </div>
         </div>
         `
+        //AppendChild div (latestPostCard is a div)
         latestPostCard.appendChild(createLatestCard);
     })
 }
