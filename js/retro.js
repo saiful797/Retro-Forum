@@ -2,7 +2,6 @@ const latestPost = async () =>{
     const url = 'https://openapi.programming-hero.com/api/retro-forum/latest-posts';
     const res = await fetch(url);
     const data = await res.json();
-    // console.log(data);
 
     data.forEach(postData => {
         let latestPostDate = '';
@@ -27,11 +26,11 @@ const latestPost = async () =>{
         else{
             authorDesignation = 'Unknown';
         }
-
         
+        // Create div for Latest Post Cards
         const createLatestCard = document.createElement('div');
 
-        createLatestCard.classList = `card w-96 h-[600px] bg-base-100 shadow-xl`;
+        createLatestCard.classList = `card w-96 h-[600px] bg-base-100 shadow-2xl`;
         createLatestCard.innerHTML =`
         <figure class="px-10 pt-10">
             <img src="${postData.cover_image}" alt="Shoes" class="rounded-xl" />
