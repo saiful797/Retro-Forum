@@ -1,18 +1,29 @@
-// Discussion Cards
-const discussionCardMusic = async () => {
-    const url = 'https://openapi.programming-hero.com/api/retro-forum/posts';
+// search input
+const searchBtn = document.getElementById('search-btn');
+
+searchBtn.addEventListener('click',function(){
+    const searchInputField = document.getElementById('search-input');
+    const searchValue = searchInputField.value;
+
+    searchAll(searchValue);
+});
+
+const searchAll =async (searchValue) => {
+    const url = `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchValue}`
     const res = await fetch(url);
-    const posts = await res.json();
-    const postsCards = posts.posts;
-    // console.log(postsCards);
+    const searchData = await res.json();
+
+    const searchCards = searchData.posts;
 
     let id1 = 0;
-    postsCards.forEach(post =>{
-        const allPostsCards = document.getElementById('all-posts-cards');
+    const allPostsCards = document.getElementById('all-posts-cards');
+    allPostsCards.innerHTML = '';
+
+    searchCards.forEach(post =>{
         const postsCard = document.createElement('div');
         postsCard.classList =`flex gap-10 bg-slate-200 p-5 rounded-2xl`;
         postsCard.innerHTML = `
-        <div id="card${id1}" class="h-20 w-40 md:w-20 bg-white flex justify-center items-center relative rounded-xl">
+        <div id="card${id1}" class="h-20 w-20 flex justify-center items-center relative rounded-xl">
             <img class="rounded-2xl" src="${post.image}" alt="">
         </div>
         <div class="space-y-4 w-full">
@@ -38,7 +49,86 @@ const discussionCardMusic = async () => {
                         <p>${post.posted_time} min</p>
                     </div>
                 </div>
-                <div class="btn w-12 h-12 rounded-full bg-[#10B981] flex justify-center items-center">
+                <div onclick="markAsRead()" class="btn w-12 h-12 rounded-full bg-[#10B981] flex justify-center items-center">
+                    <div class="text-white w-10"><i class="fa-solid fa-envelope-open-text"></i></div>
+                </div>
+            </div>
+        </div>
+             
+        `
+        id1 +=1 ;
+        allPostsCards.appendChild(postsCard);
+    })
+
+    let id2 = 0;
+    postsCards.forEach(post => {
+        let cardId = 'card' + id2;
+        // console.log(post.isActive);
+        if(!!post.isActive){
+            const isActiveStatus = document.getElementById(cardId);
+            const div = document.createElement('div');
+
+            div.classList = `absolute h-5 w-5 bg-[#10B981] -top-1 -right-1 rounded-full border-2 border-white`;
+
+            isActiveStatus.appendChild(div);
+        }
+
+        else{
+            const isActiveStatus = document.getElementById(cardId);
+            const div = document.createElement('div');
+
+            div.classList = `absolute h-5 w-5 bg-[#ff3535] -top-1 -right-1 rounded-full border-2 border-white`;
+
+            isActiveStatus.appendChild(div);
+        }
+
+        id2 += 1;
+    })
+
+}
+
+
+
+// Discussion Cards
+const discussionCardMusic = async () => {
+    const url = 'https://openapi.programming-hero.com/api/retro-forum/posts';
+    const res = await fetch(url);
+    const posts = await res.json();
+    const postsCards = posts.posts;
+
+    let id1 = 0;
+    postsCards.forEach(post =>{
+        const allPostsCards = document.getElementById('all-posts-cards');
+        const postsCard = document.createElement('div');
+        postsCard.classList =`flex gap-10 bg-slate-200 p-5 rounded-2xl`;
+        postsCard.innerHTML = `
+        <div id="card${id1}" class="h-20 w-20 flex justify-center items-center relative rounded-xl">
+            <img class="rounded-2xl" src="${post.image}" alt="">
+        </div>
+        <div class="space-y-4 w-full">
+            <div class="flex gap-x-20">
+                <p>#${post.category}</p>
+                <p>Author : ${post.author.name}</p>
+            </div>
+            <h2 class="text-2xl font-bold">${post.title}</h2>
+            <p class="text-lg font-medium">${post.description}</p>
+            <hr class="w-full h-[2px] bg-[#949393]">
+            <div class="flex justify-between">
+                <div class="flex justify-between gap-x-10">
+                    <div class="gap-2 flex">
+                        <h5><i class="fa-regular fa-message"></i></h5>
+                        <p>${post.comment_count}</p>
+                    </div>
+                    <div class="gap-2 flex">
+                        <h5><i class="fa-regular fa-eye"></i></h5>
+                        <p>${post.view_count}</p>
+                    </div>
+                    <div class="gap-2 flex">
+                        <h5><i class="fa-regular fa-clock"></i></h5>
+                        <p>${post.posted_time} min</p>
+                    </div>
+                </div>
+                <div onclick="markAsRead()" class="btn w-12 h-12 rounded-full bg-[#10B981] flex justify-center items-center">
                     <div class="text-white w-10"><i class="fa-solid fa-envelope-open-text"></i></div>
                 </div>
             </div>
@@ -74,12 +164,21 @@ const discussionCardMusic = async () => {
 
         id2 += 1;
     })
-
 }
 
 discussionCardMusic();
 
+// Message Read Marks
+// const markAsRead = () =>{
+//     const readMarks = document.getElementById('show-read-marks');
+//     const div = document.createElement('div');
+//     div.classList = `flex justify-between h-12 bg-slate-200 p-2 rounded-lg shadow-sm shadow-black`;
+//     div.innerHTML = `
+//     <h1>hello</h1>
+//     <p>400</p>
+//     `
 
+// }
 
 // Latest Post Cards
 const latestPost = async () =>{
