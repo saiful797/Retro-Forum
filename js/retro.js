@@ -7,8 +7,50 @@ const discussionCardMusic = async () => {
     console.log(postsCards);
 
     postsCards.forEach(post =>{
-        // console.log(post);
-        
+        const allPostsCards = document.getElementById('all-posts-cards');
+
+        const postsCard = document.createElement('div');
+        postsCard.classList =`flex gap-10 bg-slate-200 p-5 rounded-2xl`;
+        postsCard.innerHTML = `
+        <div class="h-20 w-40 md:w-20 bg-white flex justify-center items-center relative rounded-xl">
+            <img class="rounded-2xl" src="${post.image}" alt="">
+            <div class="hidden absolute h-5 w-5 bg-[#FF3434] -top-1 -right-1 rounded-full border-2 border-white">
+            </div>
+            <div class="absolute h-5 w-5 bg-[#10B981] -top-1 -right-1 rounded-full border-2 border-white">
+            </div>
+        </div>
+        <div class="space-y-4 w-full">
+            <div class="flex gap-x-20">
+                <p>#${post.category}</p>
+                <p>Author : ${post.author.name}</p>
+            </div>
+            <h2 class="text-2xl font-bold">${post.title}</h2>
+            <p class="text-lg font-medium">${post.description}</p>
+            <hr class="w-full h-[2px] bg-[#949393]">
+            <div class="flex justify-between">
+                <div class="flex justify-between gap-x-10">
+                    <div class="gap-2 flex">
+                        <h5><i class="fa-regular fa-message"></i></h5>
+                        <p>${post.comment_count}</p>
+                    </div>
+                    <div class="gap-2 flex">
+                        <h5><i class="fa-regular fa-eye"></i></h5>
+                        <p>${post.view_count}</p>
+                    </div>
+                    <div class="gap-2 flex">
+                        <h5><i class="fa-regular fa-clock"></i></h5>
+                        <p>${post.posted_time} min</p>
+                    </div>
+                </div>
+                <div class="btn w-12 h-12 rounded-full bg-[#10B981] flex justify-center items-center">
+                    <div class="text-white w-10"><i class="fa-solid fa-envelope-open-text"></i></div>
+                </div>
+            </div>
+        </div>
+             
+        `
+
+       allPostsCards.appendChild(postsCard);
     })
 }
 
