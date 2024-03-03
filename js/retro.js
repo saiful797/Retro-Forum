@@ -5,29 +5,50 @@ const latestPost = async () =>{
     // console.log(data);
 
     data.forEach(postData => {
-        // console.log(postData);
+        let latestPostDate = '';
+        let authorDesignation = '';
+
         const latestPostCard = document.getElementById('latest-post-card');
+
+        //Published Date
+        const postDate = postData.author.posted_date;
+        if(!!postDate){
+            latestPostDate = postData.author.posted_date;
+        }
+        else{
+            latestPostDate = 'No publish date';
+        }
+
+        //Author Designation
+        authorDesignation = postData.author.designation;
+        if(!!authorDesignation){
+            authorDesignation = postData.author.designation;
+        }
+        else{
+            authorDesignation = 'Unknown';
+        }
+
         
         const createLatestCard = document.createElement('div');
 
-        createLatestCard.classList = `card w-96 bg-base-100 shadow-xl`;
+        createLatestCard.classList = `card w-96 h-[600px] bg-base-100 shadow-xl`;
         createLatestCard.innerHTML =`
         <figure class="px-10 pt-10">
             <img src="${postData.cover_image}" alt="Shoes" class="rounded-xl" />
         </figure>
         <div class="card-body space-y-3">
             <h2 class="flex gap-1"> 
-                <span><img src="images/icons/calender.svg" alt=""></span>29 January 2024
+                <span><img src="images/icons/calender.svg" alt=""></span>${latestPostDate}
             </h2>
-            <p class="text-xl font-medium">Gaming Enthusiast Expert in Play</p>
-            <p>Leading gaming expert with a wealth of knowledge and passion for all things gaming</p>
+            <p class="text-xl font-medium">${postData.title}</p>
+            <p>${postData.description}</p>
             <div class="flex gap-5">
                 <div>
-                    <img src="images/profile.png" alt="">
+                    <img class="rounded-full h-16 w-16" src="${postData.profile_image}" alt="">
                 </div>
                 <div>
-                    <h2 class="text-xl font-bold">Cameron Williamson</h2>
-                    <p>Unknown</p>
+                    <h2 class="text-xl font-bold">${postData.author.name}</h2>
+                    <p>${authorDesignation}</p>
                 </div>
             </div>
         </div>
