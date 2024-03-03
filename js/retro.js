@@ -4,20 +4,16 @@ const discussionCardMusic = async () => {
     const res = await fetch(url);
     const posts = await res.json();
     const postsCards = posts.posts;
-    console.log(postsCards);
+    // console.log(postsCards);
 
+    let id1 = 0;
     postsCards.forEach(post =>{
         const allPostsCards = document.getElementById('all-posts-cards');
-
         const postsCard = document.createElement('div');
         postsCard.classList =`flex gap-10 bg-slate-200 p-5 rounded-2xl`;
         postsCard.innerHTML = `
-        <div class="h-20 w-40 md:w-20 bg-white flex justify-center items-center relative rounded-xl">
+        <div id="card${id1}" class="h-20 w-40 md:w-20 bg-white flex justify-center items-center relative rounded-xl">
             <img class="rounded-2xl" src="${post.image}" alt="">
-            <div class="hidden absolute h-5 w-5 bg-[#FF3434] -top-1 -right-1 rounded-full border-2 border-white">
-            </div>
-            <div class="absolute h-5 w-5 bg-[#10B981] -top-1 -right-1 rounded-full border-2 border-white">
-            </div>
         </div>
         <div class="space-y-4 w-full">
             <div class="flex gap-x-20">
@@ -49,12 +45,41 @@ const discussionCardMusic = async () => {
         </div>
              
         `
+        id1 +=1 ;
+        allPostsCards.appendChild(postsCard);
 
-       allPostsCards.appendChild(postsCard);
     })
+
+    let id2 = 0;
+    postsCards.forEach(post => {
+        let cardId = 'card' + id2;
+        // console.log(post.isActive);
+        if(!!post.isActive){
+            const isActiveStatus = document.getElementById(cardId);
+            const div = document.createElement('div');
+
+            div.classList = `absolute h-5 w-5 bg-[#10B981] -top-1 -right-1 rounded-full border-2 border-white`;
+
+            isActiveStatus.appendChild(div);
+        }
+
+        else{
+            const isActiveStatus = document.getElementById(cardId);
+            const div = document.createElement('div');
+
+            div.classList = `absolute h-5 w-5 bg-[#ff3535] -top-1 -right-1 rounded-full border-2 border-white`;
+
+            isActiveStatus.appendChild(div);
+        }
+
+        id2 += 1;
+    })
+
 }
 
 discussionCardMusic();
+
+
 
 // Latest Post Cards
 const latestPost = async () =>{
