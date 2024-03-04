@@ -7,13 +7,8 @@ searchBtn.addEventListener('click',function(){
     searchAll(searchValue);
 });
 
-const toggleLoadingSpinner = () =>{
-    const loadingSpinner = document.getElementById('loading-spinner');
-    loadingSpinner.classList.remove('hidden');
-}
 
 const searchAll =async (searchValue) => {
-    toggleLoadingSpinner();
     const url = `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchValue}`
     const res = await fetch(url);
     const searchData = await res.json();
