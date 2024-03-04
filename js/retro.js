@@ -97,8 +97,6 @@ const searchAll =async (searchValue) => {
 }
 
 
-
-
 // Discussion Cards
 const discussionCardMusic = async () => {
     const url = 'https://openapi.programming-hero.com/api/retro-forum/posts';
