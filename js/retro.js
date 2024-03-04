@@ -51,7 +51,7 @@ const searchAll =async (searchValue) => {
                     </div>
                     <div class="gap-2 flex">
                         <h5><i class="fa-regular fa-clock"></i></h5>
-                        <p>${post.posted_time} min</p>
+                        <p id='post${id1}'>${post.posted_time} min</p>
                     </div>
                 </div>
                 <div onclick="markAsRead()" class="btn w-12 h-12 rounded-full bg-[#10B981] flex justify-center items-center">
@@ -130,7 +130,7 @@ const discussionCardMusic = async () => {
                     </div>
                     <div class="gap-2 flex">
                         <h5><i class="fa-regular fa-clock"></i></h5>
-                        <p>${post.posted_time} min</p>
+                        <p id='post${id1}'>${post.posted_time} min</p>
                     </div>
                 </div>
                 <div onclick="markAsRead()" class="btn w-12 h-12 rounded-full bg-[#10B981] flex justify-center items-center">
@@ -179,22 +179,30 @@ const markAsRead = () =>{
     const readMarks = document.getElementById('show-read-marks');
     const getSearchButtonByClassName = document.querySelectorAll('.search-button');
     // console.log(getSearchButtonByClassName);
-
+    
+    let count =1;
     for(const i=0; i<getSearchButtonByClassName.length; i++){
-        const getSearchTitle = getSearchButtonByClassName[i];
+        const postTitleId ='post-title'+ i;
+        const postId = 'post'+i;
+        const postTitle = document.getElementById(postTitleId).innerText;
+        const postViews = document.getElementById(postId).innerText;
+        const readCunt = document.getElementById('read-count');
 
-        // const postTitleId ='post-title'+ i;
-        // const postTitle = document.getElementById(postTitleId).innerText;
-        // console.log(postTitle);
+        const div = document.createElement('div');
+
+        div.classList = `flex justify-between  items-center gap-3 h-24 bg-slate-200 p-2 rounded-lg shadow-sm shadow-black`;
+        div.innerHTML = `
+        <h1>${postTitle}</h1>
+        <div class="gap-2 flex">
+            <h5><i class="fa-regular fa-eye"></i></h5>
+            <p>${postViews}</p>
+        </div>
+        `
+        readCunt.innerText = count;
+        readMarks.appendChild(div);
+        count += 1;
     }
-    const div = document.createElement('div');
-
-    div.classList = `flex justify-between h-12 bg-slate-200 p-2 rounded-lg shadow-sm shadow-black`;
-    div.innerHTML = `
-    <h1>hello</h1>
-    <p>490</p>
-    `
-    readMarks.appendChild(div);
+    
 }
 
 // Latest Post Cards
