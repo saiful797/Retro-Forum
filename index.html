@@ -70,7 +70,7 @@
                         <p class="w-4/5 md:w-full text-sm md:text-xl">Share your favorite opinion and win and wp forum coffee mug!</p>
                         <div class="bg-white rounded-full flex justify-between w-56 md:w-full">
                             <input type="text" name="" id="search-input" placeholder="Search here..." class="md:h-14 w-40 md:w-96 text-black rounded-full p-3">
-                            <button id="search-btn" class=" md:h-14 w-16 md:w-48 btn rounded-full bg-[#5155cc] md:text-xl md:font-semibold text-white">Search</button>
+                            <button onclick="loadingToggleSpinner()" id="search-btn" class=" md:h-14 w-16 md:w-48 btn rounded-full bg-[#5155cc] md:text-xl md:font-semibold text-white">Search</button>
                         </div>
                     </div>
                     <div class="bg-white text-black rounded-2xl p-2 md:p-5 flex-col-1 h-52 space-y-5 md:text-xl md:font-semibold">
@@ -101,15 +101,18 @@
     <main>
         <!-- Let’s Discuss Section-->
         <section class="container text-center mt-10">
+            <!-- Loading Sinner -->
+            <div id="toggle-spinner" class="text-center hidden">
+                <span class="loading loading-spinner loading-lg"></span>
+            </div>
+
             <h1 class="text-3xl md:text-6xl font-bold mb-3">Let's Discuss</h1>
             <p class="text-base p-2 md:text-xl font-medium md:font-semibold mx-auto w-full md:w-4/5 mb-10">"Retro Forum" could refer to a variety of things, depending on the context: Online Community, Physical Gathering Place, Organization or Movement. So without further context, it's difficult to determine the specific meaning of "Retro Forum".</p>
         </section>
         <!-- Discuss Section Cards -->
         <section class="container mx-auto flex-col-1 md:flex justify-around space-y-6 md:space-y-0">
             <div id="all-posts-cards" class="space-y-5">
-                <div id="loading-spinner" class="text-center hidden">
-                    <span class="loading loading-spinner loading-lg"></span>
-                </div>
+                
             </div>
 
             <div id="show-read-marks" class="p-5 h-1/2 rounded-xl flex-col shadow-sm shadow-[#c2e5d9] space-y-4">

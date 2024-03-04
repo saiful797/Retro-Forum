@@ -7,6 +7,15 @@ searchBtn.addEventListener('click',function(){
     searchAll(searchValue);
 });
 
+const loadingToggleSpinner = () =>{
+    const toggleSpinner = document.getElementById('toggle-spinner');
+    toggleSpinner.classList.remove('hidden');
+
+    setTimeout(function(){
+        toggleSpinner.classList.add('hidden');
+    },2000);
+    
+}
 
 const searchAll =async (searchValue) => {
     const url = `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchValue}`
