@@ -61,7 +61,7 @@ const searchAll =async (searchValue) => {
     })
 
     let id2 = 0;
-    postsCards.forEach(post => {
+    searchCards.forEach(post => {
         let cardId = 'card' + id2;
         // console.log(post.isActive);
         if(!!post.isActive){
