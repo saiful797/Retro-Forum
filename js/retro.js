@@ -18,6 +18,7 @@ const loadingToggleSpinner = () =>{
 }
 
 const searchAll =async (searchValue) => {
+    
     const url = `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchValue}`
     const res = await fetch(url);
     const searchData = await res.json();
