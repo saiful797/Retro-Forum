@@ -4,11 +4,16 @@ const searchBtn = document.getElementById('search-btn');
 searchBtn.addEventListener('click',function(){
     const searchInputField = document.getElementById('search-input');
     const searchValue = searchInputField.value;
-
     searchAll(searchValue);
 });
 
+const toggleLoadingSpinner = () =>{
+    const loadingSpinner = document.getElementById('loading-spinner');
+    loadingSpinner.classList.remove('hidden');
+}
+
 const searchAll =async (searchValue) => {
+    toggleLoadingSpinner();
     const url = `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchValue}`
     const res = await fetch(url);
     const searchData = await res.json();
@@ -21,9 +26,9 @@ const searchAll =async (searchValue) => {
 
     searchCards.forEach(post =>{
         const postsCard = document.createElement('div');
-        postsCard.classList =`flex gap-10 bg-slate-200 p-5 rounded-2xl`;
+        postsCard.classList =`search-button flex gap-10 bg-slate-200 p-5 rounded-2xl`;
         postsCard.innerHTML = `
-        <div id="card${id1}" class="h-20 w-20 flex justify-center items-center relative rounded-xl">
+        <div id="card${id1}" class=" h-20 w-20 flex justify-center items-center relative rounded-xl">
             <img class="rounded-2xl" src="${post.image}" alt="">
         </div>
         <div class="space-y-4 w-full">
@@ -31,7 +36,7 @@ const searchAll =async (searchValue) => {
                 <p>#${post.category}</p>
                 <p>Author : ${post.author.name}</p>
             </div>
-            <h2 class="text-2xl font-bold">${post.title}</h2>
+            <h2 id="post-title${id1}" class="text-2xl font-bold">${post.title}</h2>
             <p class="text-lg font-medium">${post.description}</p>
             <hr class="w-full h-[2px] bg-[#949393]">
             <div class="flex justify-between">
@@ -84,8 +89,8 @@ const searchAll =async (searchValue) => {
 
         id2 += 1;
     })
-
 }
+
 
 
 
@@ -100,7 +105,7 @@ const discussionCardMusic = async () => {
     postsCards.forEach(post =>{
         const allPostsCards = document.getElementById('all-posts-cards');
         const postsCard = document.createElement('div');
-        postsCard.classList =`flex gap-10 bg-slate-200 p-5 rounded-2xl`;
+        postsCard.classList =`search-button flex gap-10 bg-slate-200 p-5 rounded-2xl`;
         postsCard.innerHTML = `
         <div id="card${id1}" class="h-20 w-20 flex justify-center items-center relative rounded-xl">
             <img class="rounded-2xl" src="${post.image}" alt="">
@@ -110,7 +115,7 @@ const discussionCardMusic = async () => {
                 <p>#${post.category}</p>
                 <p>Author : ${post.author.name}</p>
             </div>
-            <h2 class="text-2xl font-bold">${post.title}</h2>
+            <h2 id="post-title${id1}" class="text-2xl font-bold">${post.title}</h2>
             <p class="text-lg font-medium">${post.description}</p>
             <hr class="w-full h-[2px] bg-[#949393]">
             <div class="flex justify-between">
@@ -169,16 +174,28 @@ const discussionCardMusic = async () => {
 discussionCardMusic();
 
 // Message Read Marks
-// const markAsRead = () =>{
-//     const readMarks = document.getElementById('show-read-marks');
-//     const div = document.createElement('div');
-//     div.classList = `flex justify-between h-12 bg-slate-200 p-2 rounded-lg shadow-sm shadow-black`;
-//     div.innerHTML = `
-//     <h1>hello</h1>
-//     <p>400</p>
-//     `
+const markAsRead = () =>{
+    
+    const readMarks = document.getElementById('show-read-marks');
+    const getSearchButtonByClassName = document.querySelectorAll('.search-button');
+    // console.log(getSearchButtonByClassName);
 
-// }
+    for(const i=0; i<getSearchButtonByClassName.length; i++){
+        const getSearchTitle = getSearchButtonByClassName[i];
+
+        // const postTitleId ='post-title'+ i;
+        // const postTitle = document.getElementById(postTitleId).innerText;
+        // console.log(postTitle);
+    }
+    const div = document.createElement('div');
+
+    div.classList = `flex justify-between h-12 bg-slate-200 p-2 rounded-lg shadow-sm shadow-black`;
+    div.innerHTML = `
+    <h1>hello</h1>
+    <p>490</p>
+    `
+    readMarks.appendChild(div);
+}
 
 // Latest Post Cards
 const latestPost = async () =>{
